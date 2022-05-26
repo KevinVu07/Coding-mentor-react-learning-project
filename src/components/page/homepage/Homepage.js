@@ -1,20 +1,16 @@
 import "./Homepage.scss";
 import Header from "../../shared/header/Header";
 import Carousel from "../../ui/carousel/Carousel";
-import CategoryClassComponent from "../../ui/category/CategoryClass";
+import Category from "../../ui/category/Category";
 import FlashSale from "../../ui/flash-sale/Flash-sale";
 import Trending from "../../ui/trending/Trending";
 import Suggestion from "../../ui/suggestion/Suggestion";
-import Footer from "../../shared/footer/Footer";
+import Layout from "../../shared/layout/Layout";
+import CategoryClassComponent from "../../ui/category/CategoryClass";
 
-const Home = (props) => {
-  const logoutHandler = () => {
-    props.logoutHeaderBroastCast(false);
-  };
-
+const Home = () => {
   return (
-    <>
-      <Header logoutBroastCast={logoutHandler} />
+    <Layout>
       <Carousel />
       <main className="bg-gray py-4">
         <CategoryClassComponent />
@@ -22,8 +18,7 @@ const Home = (props) => {
         <Trending />
         <Suggestion />
       </main>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

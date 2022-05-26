@@ -1,107 +1,10 @@
 import "./Suggestion.scss";
 import hoanxu from "../../../assets/images/hoanxu.png";
-import productImage from "../../../assets/images/item.jpeg";
-import footerImage from "../../../assets/images/sale-footer.png";
 
+import { Link } from 'react-router-dom';
+import ProductDatas from "../../../data/Product.data";
 const Suggestion = () => {
-    const items = [
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },{
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-        {
-            productImage: productImage,
-            footerImage: footerImage,
-            description: "Mũ lưỡi trai, Nón kết thêu chữ Memorie phong cách Ulzzang unisex",
-            price: "đ1.700",
-            sold: "2,6k",
-            discountPercentage: 51
-        },
-    ];
-
+    const items = ProductDatas;
     const loadMore = () => {
         
     }
@@ -129,7 +32,7 @@ const Suggestion = () => {
                                 </div>
                             </div>
                             <div className="hint-item-footer w-100 mt-2 p-2">
-                                <p className="item-description">{item.description}</p>
+                                <p className="item-description"><Link to={`/product/${item.id}`}>{item.description}</Link></p>
                                 <div className="d-flex justify-content-between align-items-center">
                                     <span className="text-primary">{item.price}</span>
                                     <small className="text-muted text-small">Đã bán {item.sold}</small>

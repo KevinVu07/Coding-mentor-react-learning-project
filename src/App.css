@@ -37,3 +37,28 @@ button:disabled {
   width: 100%;
   background: #F5F5F5;
 }
+
+.header-spacing {
+  margin-top: 155px;
+}
+
+.border-primary { 
+  border: 1px solid #EE4D2D !important;;
+}
+
+.btn {
+  border-radius: 0 !important;
+}
+
+.lh-xs {
+  line-height: 0.5;
+}
+
+button:hover {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+button:focus {
+  box-shadow: none !important;
+}

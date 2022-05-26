@@ -1,32 +1,17 @@
-import "./Login.scss";
+import "./Register.scss";
 import logo from "../../../assets/images/logo.png";
 import { useState, useEffect } from "react";
 import Footer from "../../shared/footer/Footer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState();
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState();
   const navigate = useNavigate();
-
-  const login = () => {
-    axios
-      .post("https://shopee-nodejs.herokuapp.com/api/auth/login/", {
-        email: email,
-        password: password,
-      })
-      .then(function (response) {
-        console.log(response);
-        localStorage.setItem("isLoggedIn", "1");
-        navigate("/");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
+  const [error, setError] = useState();
 
   useEffect(() => {
     setIsEmailValid(email.includes("@"));
@@ -41,12 +26,28 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+  const register = () => {
+    axios
+      .post("https://shopee-nodejs.herokuapp.com/api/auth/register", {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+        navigate("/login");
+      })
+      .catch(function (error) {
+        console.log(error);
+        setError(error.response.data);
+      });
+  };
+
   return (
     <>
       <nav className="container navbar d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center brand">
           <img src={logo} alt="logo" />
-          <h2>Đăng nhập</h2>
+          <h2>ĐĂNG KÍ TÀI KHOẢN</h2>
         </div>
         <div className="text-primary">Cần trợ giúp?</div>
       </nav>
@@ -54,7 +55,7 @@ const Login = () => {
         <section className="container">
           <form className="form-container">
             <div className="d-flex justify-content-between">
-              <p className="text-heading">Đăng nhập</p>
+              <p className="text-heading">ĐĂNG KÍ</p>
               <svg width="40" height="40" fill="none" className="_3F92IZ">
                 <g clipPath="url(#clip0)">
                   <path
@@ -78,6 +79,7 @@ const Login = () => {
               </svg>
             </div>
             <div className="form-input">
+              {error && <p className="text-danger mb-2">{error}</p>}
               <input
                 type="text"
                 name="username"
@@ -106,42 +108,11 @@ const Login = () => {
             <button
               type="button"
               className="login-button bg-primary"
-              onClick={login}
+              onClick={register}
               disabled={!isEmailValid || !isPasswordValid}
             >
-              ĐĂNG NHẬP
+              ĐĂNG KÍ
             </button>
-            <div className="d-flex justify-content-between">
-              <span className="text-secondary text-small">Quên mật khẩu</span>
-              <span className="text-secondary text-small">
-                Đăng nhập với SMS
-              </span>
-            </div>
-            <div className="text-center text-muted d-flex justify-content-between">
-              <hr />
-              <span style={{ margin: "0 10px" }}>Hoặc</span>
-              <hr />
-            </div>
-            <div className="social text-center">
-              <button>
-                <span className="social-icon facebook" />
-                Facebook
-              </button>
-              <button>
-                <span className="social-icon google" />
-                Google
-              </button>
-              <button>
-                <span className="social-icon apple" />
-                Apple
-              </button>
-            </div>
-            <div className="text-center">
-              <span className="text-muted mx-2">Bạn mới đến với shopee?</span>
-              <Link className="text-primary" to="/register/">
-                Đăng kí
-              </Link>
-            </div>
           </form>
         </section>
       </main>
@@ -150,4 +121,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

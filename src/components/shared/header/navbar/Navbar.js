@@ -1,12 +1,17 @@
 import "./Navbar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { Component } from "react";
 import Search from "./search/Search";
 import logo from '../../../../assets/images/logo-full-white.png';
-
-const NavBar = (props) => {
-    let [cartNumber, setCartNumber] = useState(props.shoppingCartNumbers);
-    const favorites = [
+import { Link } from 'react-router-dom';
+class NavBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cartNumber: this.props.shoppingCartNumbers
+        }
+    }
+    favorites = [
         {
             name: "Thời trang nam",
             id: 1
@@ -29,42 +34,45 @@ const NavBar = (props) => {
         }
     ];
     
-    const updateCart = () => {
-        const newCartNumber = cartNumber + 1;
-        setCartNumber(newCartNumber);
-        console.log(cartNumber);
+    updateCart = () => {
+        const newCartNumber = this.state.cartNumber + 1;
+        this.setState({
+            cartNumber: newCartNumber
+        })
     }
     
-    const searchHandler = (searchTerm) => {
+    searchHandler = (searchTerm) => {
         console.log(searchTerm);
-        props.onSearchNav(searchTerm);
+        this.props.onSearchNav(searchTerm);
     }
     
-    return (
-        <nav className="wrapper navbar navbar-expand-lg navbar-light ">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">
-                    <img src={logo} alt="" width="162px"/>
-                </a>
-                <Search onSearch={searchHandler}>
-                    <div className="text-small mt-2 align-self-start">
-                        {favorites.map(item => {
-                            return <span className="me-3" key={item.name}>{item.name}</span>
-                        })}
-                    </div>
-                </Search>
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li className="nav-item position-relative" onClick={updateCart}>
-                        <FontAwesomeIcon icon="fa-cart-shopping"/>
-                        <span
-                            className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-primary">
-                            {cartNumber}
+    render() {
+        return (
+            <nav className="wrapper navbar navbar-expand-lg navbar-light ">
+                <div className="container-fluid">
+                    <Link className="navbar-brand" to="/">
+                        <img src={logo} alt="" width="162px"/>
+                    </Link>
+                    <Search onSearch={this.searchHandler.bind(this)}>
+                        <div className="text-small mt-2 align-self-start">
+                            {this.favorites.map(item => {
+                                return <span className="me-3" key={item.name}>{item.name}</span>
+                            })}
+                        </div>
+                    </Search>
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item position-relative" onClick={this.updateCart.bind(this)}>
+                            <FontAwesomeIcon icon="fa-cart-shopping"/>
+                            <span
+                                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-primary">
+                            {this.state.cartNumber}
                         </span>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    )
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        )
+    }
 }
 
 export default NavBar;

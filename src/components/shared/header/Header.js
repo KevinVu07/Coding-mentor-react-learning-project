@@ -1,10 +1,10 @@
 import "./Header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import avatar from "../../../assets/images/avatar.jpeg";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "./navbar/Navbar";
-import NavbarClassComponent from "./navbar/NavbarClass";
 
-const Header = (props) => {
+const Header = () => {
   const user = {
     userName: "nguyenhuuluan",
     avatar: avatar,
@@ -15,8 +15,10 @@ const Header = (props) => {
     // props.onSearchHeader(searchTerm);
   };
 
+  const navigate = useNavigate();
   const logout = () => {
-    props.logoutBroastCast(false);
+    localStorage.setItem("isLoggedIn", "0");
+    navigate("/login");
   };
 
   return (
@@ -78,7 +80,9 @@ const Header = (props) => {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <a className="dropdown-item">Tài khoản của tôi</a>
+                  <Link className="dropdown-item" to="/account/profile">
+                    Tài khoản của tôi
+                  </Link>
                 </li>
                 <li>
                   <a className="dropdown-item">Đơn mua</a>
@@ -93,7 +97,7 @@ const Header = (props) => {
           </ul>
         </nav>
       </div>
-      <NavbarClassComponent
+      <NavBar
         shoppingCartNumbers={user.shoppingCartNumbers}
         favorites={user.favorites}
         onSearchNav={searchNavHandler}
