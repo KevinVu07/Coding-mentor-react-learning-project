@@ -5,6 +5,8 @@ import Footer from "../../shared/footer/Footer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+console.log("this is a test");
+
 const Register = () => {
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState();
